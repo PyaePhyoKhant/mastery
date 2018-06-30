@@ -1,4 +1,4 @@
-from .models import Question, Answer, Tournament
+from .models import Question, Answer, Tournament, TournamentParticipation
 from rest_framework import serializers
 
 
@@ -27,4 +27,10 @@ class TournamentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tournament
+        fields = '__all__'
+
+
+class TournamentParticipationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TournamentParticipation
         fields = '__all__'

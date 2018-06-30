@@ -2,7 +2,7 @@ from rest_framework import viewsets, status
 from rest_framework.decorators import list_route, detail_route
 from rest_framework.response import Response
 from .models import Question, Answer, Tournament, TournamentParticipation
-from .serializers import QuestionSerializer, QASerializer, TournamentSerializer
+from .serializers import QuestionSerializer, QASerializer, TournamentSerializer, TournamentParticipationSerializer
 
 
 def calculate_score(questions, answers):
@@ -69,8 +69,7 @@ class TournamentViewSet(viewsets.ModelViewSet):
                 learner = request.user.learner_set.all()[0]
                 learner.points += score * 5
                 learner.save()
-                t = Tournament.objects.get(id=pk)
-                TournamentParticipation.objects.create(learner=learner, tournament=t, score=score)
+                TournamentParticipation.objects.create(learner=learner, tournament=pk, score=score)
             # return_questions = []
             # for i in range(len(questions)):
             #     temp_dict = {}
@@ -87,3 +86,9 @@ class TournamentViewSet(viewsets.ModelViewSet):
             #     temp_dict['correct_a_id'] = correct_id
             #     return_questions.append(temp_dict)
             return Response(status=status.HTTP_200_OK)
+
+    @detail_route(methods=['GET', ], url_path='result')
+    def result(self, request, pk):
+        participations = TournamentParticipation.objects.filter(tournament=pk).order_by('score')
+        serializer = TournamentParticipationSerializer(participations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
