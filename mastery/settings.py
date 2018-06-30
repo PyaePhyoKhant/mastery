@@ -24,7 +24,7 @@ SECRET_KEY = '$77&*wd$iyew-66az5rklaw4vpo0i5m%l+sb^9_tno+qb(1qc4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-ALLOWED_HOSTS = ['http://mastery-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
