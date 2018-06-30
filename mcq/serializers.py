@@ -15,3 +15,8 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         depth = 1
         fields = ('id', 'question_text', 'answer_set')
+
+
+class QASerializer(serializers.Serializer):
+    questions = serializers.ListField()
+    answers = serializers.ListField()
