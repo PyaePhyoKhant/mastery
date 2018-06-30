@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$77&*wd$iyew-66az5rklaw4vpo0i5m%l+sb^9_tno+qb(1qc4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['http://mastery.ap-southeast-1.elasticbeanstalk.com/', '127.0.0.1:8000']
+DEBUG = True
+ALLOWED_HOSTS = ['http://mastery-dev.ap-southeast-1.elasticbeanstalk.com/', '127.0.0.1:8000']
 
 
 # Application definition
