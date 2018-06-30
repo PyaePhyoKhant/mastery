@@ -69,7 +69,8 @@ class TournamentViewSet(viewsets.ModelViewSet):
                 learner = request.user.learner_set.all()[0]
                 learner.points += score * 5
                 learner.save()
-                TournamentParticipation.objects.create(learner=learner, tournament=pk, score=score)
+                t = Tournament.objects.get(id=pk)
+                TournamentParticipation.objects.create(learner=learner, tournament=t, score=score)
             # return_questions = []
             # for i in range(len(questions)):
             #     temp_dict = {}
@@ -89,6 +90,7 @@ class TournamentViewSet(viewsets.ModelViewSet):
 
     @detail_route(methods=['GET', ], url_path='result')
     def result(self, request, pk):
-        participations = TournamentParticipation.objects.filter(tournament=pk).order_by('score')
+        t = Tournament.objects.get(id=pk)
+        participations = TournamentParticipation.objects.filter(tournament=t).order_by('-score')
         serializer = TournamentParticipationSerializer(participations, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
