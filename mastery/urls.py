@@ -17,11 +17,9 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
 import mcq.api_views as mcq_api_views
-import learner.api_views as learner_api_views
 
 router = DefaultRouter()
 router.register(r'questions', mcq_api_views.QuestionViewSet)
-router.register(r'learners', learner_api_views.LearnerViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
