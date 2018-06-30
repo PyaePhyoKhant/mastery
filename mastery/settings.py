@@ -30,14 +30,17 @@ ALLOWED_HOSTS = ['.elasticbeanstalk.com', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'learner.apps.LearnerConfig',
     'mcq.apps.McqConfig',
-    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -140,6 +143,12 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
 
 try:
     from local_settings import *

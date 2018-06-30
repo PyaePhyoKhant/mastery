@@ -16,12 +16,14 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.routers import DefaultRouter
-from mcq import api_views
+import mcq.api_views as mcq_api_views
 
 router = DefaultRouter()
-router.register(r'questions', api_views.QuestionViewSet)
+router.register(r'questions', mcq_api_views.QuestionViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include(router.urls)),
+    url(r'^auth/', include('djoser.urls')),
+    url(r'^auth/', include('djoser.urls.authtoken')),
 ]
