@@ -20,6 +20,7 @@ import mcq.api_views as mcq_api_views
 
 router = DefaultRouter()
 router.register(r'questions', mcq_api_views.QuestionViewSet)
+router.register(r'tournaments', mcq_api_views.TournamentViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

@@ -25,11 +25,17 @@ class Tournament(models.Model):
     duration = models.IntegerField()
     questions = models.ManyToManyField(Question)
 
+    def __str__(self):
+        return "{}: {} minute".format(self.title, self.duration)
+
 
 class TournamentParticipation(models.Model):
     learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     score = models.IntegerField()
+
+    def __str__(self):
+        return "{} is in {} with {} points.".format(self.learner, self.tournament, self.score)
 
     class Meta:
         unique_together = ('learner', 'tournament')

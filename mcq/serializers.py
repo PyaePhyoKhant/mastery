@@ -1,4 +1,4 @@
-from .models import Question, Answer
+from .models import Question, Answer, Tournament
 from rest_framework import serializers
 
 
@@ -15,3 +15,10 @@ class QuestionSerializer(serializers.ModelSerializer):
         model = Question
         depth = 1
         fields = ('id', 'question_text', 'answer_set')
+
+class TournamentSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Tournament
+        fields = '__all__'
