@@ -32,6 +32,10 @@ class QuestionViewSet(viewsets.ModelViewSet):
             questions = serializer.data['questions']
             answers = serializer.data['answers']
             score = calculate_score(questions, answers)
+            if request.user.id is not None:
+                learner = request.user.learner_set.all()[0]
+                learner.points += score
+                learner.save()
             return_questions = []
             for i in range(len(questions)):
                 temp_dict = {}

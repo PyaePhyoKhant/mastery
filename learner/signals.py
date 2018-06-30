@@ -5,5 +5,6 @@ from .models import Learner
 
 
 @receiver(post_save, sender=User)
-def create_learner(sender, instance, **kwargs):
-    Learner.objects.create(user=instance, name=instance.username)
+def create_learner(sender, instance, created, **kwargs):
+    if created:
+        Learner.objects.create(user=instance, name=instance.username)
