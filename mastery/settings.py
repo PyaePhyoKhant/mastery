@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'learner.apps.LearnerConfig',
     'mcq.apps.McqConfig',
     'rest_framework',
     'django.contrib.admin',
