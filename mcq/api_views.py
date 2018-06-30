@@ -1,9 +1,8 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import list_route
 from rest_framework.response import Response
-
-from .models import Question, Answer
-from .serializers import QuestionSerializer, QASerializer
+from .models import Question, Answer, Tournament
+from .serializers import QuestionSerializer, QASerializer, TournamentSerializer
 
 
 def calculate_score(questions, answers):
@@ -49,3 +48,8 @@ class QuestionViewSet(viewsets.ModelViewSet):
                 temp_dict['correct_a_id'] = correct_id
                 return_questions.append(temp_dict)
             return Response({'score': score, 'questions': return_questions}, status=status.HTTP_200_OK)
+
+
+class TournamentViewSet(viewsets.ModelViewSet):
+    queryset = Tournament.objects.all()
+    serializer_class = TournamentSerializer

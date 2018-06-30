@@ -1,4 +1,4 @@
-from .models import Question, Answer
+from .models import Question, Answer, Tournament
 from rest_framework import serializers
 
 
@@ -20,3 +20,11 @@ class QuestionSerializer(serializers.ModelSerializer):
 class QASerializer(serializers.Serializer):
     questions = serializers.ListField()
     answers = serializers.ListField()
+
+
+class TournamentSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Tournament
+        fields = '__all__'
