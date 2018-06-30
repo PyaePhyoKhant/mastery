@@ -27,8 +27,8 @@ class Tournament(models.Model):
 
 
 class TournamentParticipation(models.Model):
-    learner = models.ForeignKey(Learner)
-    tournament = models.ForeignKey(Tournament)
+    learner = models.ForeignKey(Learner, on_delete=models.CASCADE)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     score = models.IntegerField()
 
     class Meta:
