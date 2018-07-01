@@ -1,5 +1,6 @@
 from .models import Question, Answer, Tournament, TournamentParticipation
 from rest_framework import serializers
+from learner.serializers import LearnerSerializer
 
 
 class AnswerSerializer(serializers.ModelSerializer):
@@ -31,6 +32,16 @@ class TournamentSerializer(serializers.ModelSerializer):
 
 
 class TournamentParticipationSerializer(serializers.ModelSerializer):
+    title = serializers.SerializerMethodField('get_tournament_title')
+    name = serializers.SerializerMethodField('get_learner_name')
+
+    def get_tournament_title(self, obj):
+        return obj.tournament.title
+
+    def get_learner_name(self, obj):
+        return obj.learner.name
+
     class Meta:
         model = TournamentParticipation
-        fields = '__all__'
+        depth = 1
+        fields = ('id', 'score', 'name', 'title',)
